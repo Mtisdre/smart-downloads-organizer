@@ -5,7 +5,6 @@ import shutil
 from pathlib import Path
 import yaml
 
-# YAML dosyasını yükle
 CONFIG_PATH = Path(__file__).resolve().parents[2] / "config.yaml"
 if not CONFIG_PATH.exists():
     raise FileNotFoundError(f"Config file not found: {CONFIG_PATH}")
