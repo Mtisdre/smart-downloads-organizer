@@ -3,20 +3,18 @@ import argparse
 import os
 import shutil
 from pathlib import Path
+import yaml
 
-# Kullanıcının Downloads klasörü yolu
-DOWNLOADS_DIR = Path.home() / "Downloads"
+# YAML dosyasını yükle
+CONFIG_PATH = Path(__file__).resolve().parents[2] / "config.yaml"
+if not CONFIG_PATH.exists():
+    raise FileNotFoundError(f"Config file not found: {CONFIG_PATH}")
 
-# Kategorilere göre uzantı eşleşmeleri
-FILE_TYPES = {
-    "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg"],
-    "Documents": [".pdf", ".doc", ".docx", ".txt", ".xls", ".xlsx", ".ppt", ".pptx"],
-    "Videos": [".mp4", ".avi", ".mov", ".mkv", ".wmv"],
-    "Audio": [".mp3", ".wav", ".flac", ".aac", ".ogg"],
-    "Archives": [".zip", ".tar", ".gz", ".rar", ".7z"],
-    "Code": [".py", ".js", ".html", ".css", ".java", ".c", ".cpp", ".json", ".xml", ".yml", ".yaml"],
-    "Others": []
-}
+with open(CONFIG_PATH, "r") as f:
+    config = yaml.safe_load(f)
+
+DOWNLOADS_DIR = Path(config["DownloadsPath"])
+FILE_TYPES = config["FileTypes"]
 
 def organize_files():
     if not DOWNLOADS_DIR.exists():
