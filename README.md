@@ -2,10 +2,11 @@
 
 A Python CLI tool to automatically organize your Downloads folder into categorized subfolders based on file types, date, or custom rules.
 
-## Features (MVP)
+## Features
 - Categorize files by type (images, documents, videos, etc.)
 - Move files to corresponding folders automatically
 - CLI commands for organization
+- YAML configuration support to define custom categories and paths
 
 ## Installation
 ```bash
